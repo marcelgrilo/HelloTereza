@@ -8,18 +8,24 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
+using Microsoft.Extensions.Configuration;
+
 namespace HelloTerezaApi
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
-        }
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            var config = new ConfigurationBuilder().AddCommandLine(args).Build();
+            var host = new WebHostBuilder()
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseConfiguration(config)
+                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
+
+            host.Run();
+        }
     }
 }
