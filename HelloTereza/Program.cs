@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace HelloTereza
@@ -10,7 +11,7 @@ namespace HelloTereza
             Console.WriteLine("Hello Tereza!");
             while (true)
             {
-                Task.Delay(1000);
+                Thread.Sleep(3000);
                 Console.WriteLine("Hello Tereza!");
             }
         }
